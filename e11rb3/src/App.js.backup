@@ -1,0 +1,37 @@
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
+// Components
+import Sidebar from './components/Sidebar';
+import Home from './components/Home';
+import Movies from './components/Movies';
+
+// Styles
+import './styles/App.css';
+
+const links = [
+  { url: '/', text: 'Home' },
+  { url: '/movies', text: 'Movies' },
+]
+
+class App extends Component {
+  render() {
+    return (
+      <Router>
+        <div id="main">
+          <Sidebar links={links}/>
+
+          <div id="content-container">
+            <Route exact={true} path="/" component={Home} />
+            <Route exact={true} path="/movies" component={Movies} />
+            {/* <Route path="/movies/:movie_id" component={Movie} /> */}
+          </div>
+        </div>
+      </Router>
+    );
+  }
+}
+
+
+
+export default App;

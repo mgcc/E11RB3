@@ -1,0 +1,47 @@
+import React, { Component } from 'react';
+
+class Movies extends Component {
+  constructor(props)  {
+    super(props);
+
+    this.state = {
+      movies: []
+    }
+
+    this.fetchMovies = this.fetchMovies.bind(this);
+  }
+
+  componentDidMount() {
+    fetch(`http://localhost:3001/movie/find-all`)
+    .then(response => response.json())
+    .then(result => {
+      console.log(result)
+      this.setState({
+        movies: result
+      })
+    })
+    .catch(e => console.log(e));
+  }
+
+  fetchMovies() {
+
+  }
+
+  render() {
+    console.log(this.state.movies);
+    return (
+      <div className="content">
+        <h2>Movies</h2>
+        <ol>
+          {
+            this.state.movies.map(movie =>
+              <li key={movie._id}>{movie.title}</li>
+            )
+          }
+        </ol>
+      </div>
+    );
+  }
+}
+
+export default Movies;
