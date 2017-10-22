@@ -17,11 +17,17 @@ app.use(function(req, res, next) {
   next();
 });
 
+// body parsing
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
 // Setup Mongoose models
 require('./models/index');
 
 // Setup Routes
-require('./routes/index')(app);
+const MovieRouter = require('./routes/movie-router');
+app.use('/movie', MovieRouter);
 
 // Homepage message
 app.get('/', (req, res) => {
